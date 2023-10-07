@@ -1,0 +1,18 @@
+{
+    "email": "bhattjay114@gmail.com",
+    "password": "12345",
+    "profileInformation": {
+        "firstName": "Jay",
+        "lastName": "Bhatt",
+        "dob": "2002-07-24",
+        "photo": "www.google.com",
+        "phoneNumber": "8769297221"
+    },
+    "Address": {
+        "street": "Mahveer Street",
+        "city": "Banswara",
+        "state": "Rajasthan",
+        "country": "India"
+    },
+    "payment": {}
+}

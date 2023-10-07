@@ -1,0 +1,58 @@
+const express = require("express");
+
+const router = express.Router();
+
+const {
+  createContent,
+  getAllContent,
+  getContentById,
+  updateContent,
+  deleteContent,
+  uploadFile,
+  getRecommendedMovies,
+} = require("../controllers/ContentController");
+
+const { authenticate } = require("../middleware/auth");
+
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+});
+
+// create content
+router.post("/", createContent);
+
+// update content
+router.put("/:id", authenticate, updateContent);
+
+// delete content
+router.delete("/:id", authenticate, deleteContent);
+
+// get all content
+router.get("/", authenticate, getAllContent);
+
+// Get Movie Recomendation
+router.get("/recommendation", authenticate, getRecommendedMovies);
+
+// get content by id
+router.get("/:id", authenticate, getContentById);
+
+// upload content
+router.post("/upload", authenticate, upload.single("content"), uploadFile);
+
+// logic for not allowing any user to play content, genuine users only
+// router.post("/getContent/:token", authenticate, getContent);
+// // token will be used for validation whether its a genuine request or not
+// // if token valid movie will play else url will not work
+
+module.exports = router;
