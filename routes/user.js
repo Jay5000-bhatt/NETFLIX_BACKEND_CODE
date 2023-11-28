@@ -14,12 +14,12 @@ const {
 
 const { authenticate } = require("../middleware/auth");
 
-router.post("/signup", signUp);
-router.post("/login", login);
-router.post("/change", authenticate, changePassword);
-router.post("/generate-otp", authenticate, generateOtp);
-router.post("/verify-otp", authenticate, verifyOtp);
-router.put("/update", authenticate, updateProfile);
-router.post("/payment", authenticate, createPayment);
+router.post("/signup", signUp); // Work Properly
+router.post("/login", login);  // Work Properly
+router.put("/change", authenticate, changePassword); // Work Properly
+router.post("/generate-otp", authenticate, generateOtp); // Work Properly
+router.post("/verify-otp", authenticate, verifyOtp); // Work Properly
+router.put("/update", authenticate, updateProfile); // Work Properly
+router.post("/payment", authenticate, createPayment); //Work Properly
 
 module.exports = router;

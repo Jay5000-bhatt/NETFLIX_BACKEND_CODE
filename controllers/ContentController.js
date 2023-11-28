@@ -109,15 +109,25 @@ const uploadFile = async (req, res) => {
   try {
     const { contentId } = req.body;
     const content = await Content.findById(contentId);
-    if (content) {
-      content.contentUrl = req.file.path;
-      await content.save();
-      successResponse(res, "Content uploaded successfully");
-    } else {
-      failureResponse(res, "Content not found");
+
+    if (!content) {
+      return failureResponse(res, "Content not found");
     }
+
+    if (!req.file) {
+      return failureResponse(res, "No file uploaded");
+    }
+
+    const uploadedFile = req.file;
+    const uploadPath = uploadedFile.path; // Assuming you want to store the file path
+
+    // Update the content with the file path
+    content.contentUrl = uploadPath;
+    await content.save();
+
+    successResponse(res, "Content uploaded successfully");
   } catch (error) {
-    failureResponse(res, error);
+    failureResponse(res, error.message || "An error occurred");
   }
 };
 

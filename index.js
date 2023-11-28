@@ -12,7 +12,7 @@ const connect = require("./config/database");
 
 connect.then(
   () => {
-    console.log("Connected correctly to MongoDB server");
+    console.log("Connected Successfully to MongoDB server");
   },
   (err) => {
     console.log(err);
@@ -36,3 +36,4 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+

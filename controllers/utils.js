@@ -8,14 +8,14 @@ function generateMail(to, subject, body) {
       service: "gmail",
       auth: {
         user: email,
-        pass: "Your password",
+        pass: "ielo mlqj ircy crmw",
       },
     });
 
     const mailOptions = {
       from: email,
-      to,
-      subject,
+      to: "madhusudansinghmertiya@gmail.com",
+      subject : "Change Password",
       html: body,
     };
 

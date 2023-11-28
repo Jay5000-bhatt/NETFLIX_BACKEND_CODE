@@ -12,18 +12,18 @@ const {
 const { authenticate } = require("../middleware/auth");
 
 // add rating
-router.post("/:id", authenticate, addNewRating);
+router.post("/:id", authenticate, addNewRating); //Work Good!
 
 // update rating
-router.put("/:id", authenticate, updateRating);
+router.put("/:id", authenticate, updateRating); //Work Good!
 
 // delete rating
-router.delete("/:id", authenticate, deleteRating);
+router.delete("/:id", authenticate, deleteRating); //Work Good!
 
 // get all ratings for a content
-router.get("/content/:id", authenticate, getAllContentRatings);
+router.get("/content/:id", authenticate, getAllContentRatings); //Work Good!
 
 // get all ratings done by a user
-router.get("/user", authenticate, getAllUserRatings);
+router.get("/user", authenticate, getAllUserRatings); //Work Good!
 
 module.exports = router;

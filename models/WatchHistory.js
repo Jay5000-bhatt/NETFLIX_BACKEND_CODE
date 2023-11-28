@@ -13,11 +13,23 @@ const watchHistorySchema = new Schema({
     ref: "User",
     required: true,
   },
-  duration: {
+  playedDuration: {
     type: Number, // in minutes
+    required: true,
+    default: 0, // default value if not provided
+  },
+  movieDuration: {
+    type: Number, // in minutes
+    required: true,
+    default: 0, // default value if not provided
+  },
+  lastPlayed: {
+    type: Date,
+    required: true,
+    default: Date.now, // default value if not provided
   },
 });
 
-const watchHistory = mongoose.model("WatchHistory", watchHistorySchema);
+const WatchHistory = mongoose.model("WatchHistory", watchHistorySchema);
 
-module.exports = watchHistory;
+module.exports = WatchHistory;

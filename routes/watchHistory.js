@@ -12,19 +12,19 @@ const {
 
 const { authenticate } = require("../middleware/auth");
 
-// get watch history of a user
-router.get("/", authenticate, getWatchHistory);
-
 // add new watch history
-router.post("/", authenticate, createHistory);
+router.post("/", authenticate, createHistory); //Work Properly
 
 // update watch history
-router.put("/:id", authenticate, updateHistory);
-
-// delete all records
-router.delete("/all", authenticate, deleteAllHistory);
+router.put("/:id", authenticate, updateHistory); //Work Properly
 
 // delete watch history
-router.delete("/:id", authenticate, deleteHistory);
+router.delete("/:id", authenticate, deleteHistory); //Work Properly
+
+// delete all records
+router.delete("/user/:id", authenticate, deleteAllHistory); //Work Properly
+
+// get watch history of a user
+router.get("/", authenticate, getWatchHistory); //Work Properly
 
 module.exports = router;

@@ -16,20 +16,6 @@ const createHistory = async (req, res) => {
   }
 };
 
-const getWatchHistory = async (req, res) => {
-  try {
-    let userId = req.user.id;
-    let watchHistory = await WatchHistory.find({ userId })
-      .populate("userId", "email role")
-      .populate("contentId", "name genre")
-      .sort({ lastPlayed: -1 });
-
-    successResponse(res, watchHistory);
-  } catch (error) {
-    failureResponse(res, error);
-  }
-};
-
 const updateHistory = async (req, res) => {
   try {
     let data = await createUpdateHistory(
@@ -56,10 +42,22 @@ const deleteHistory = async (req, res) => {
 
 const deleteAllHistory = async (req, res) => {
   try {
-    let userId = req.user.id;
+    let userId = req.params.id;
+    console.log("Deleting history for user:", userId);
+
+    // Use Mongoose's deleteMany to remove all documents with the specified userId
     await WatchHistory.deleteMany({ userId });
+
+    // Log success
+    console.log("Watch History deleted successfully.");
+
+    // Send a success response
     successResponse(res, "Watch History deleted successfully.");
   } catch (error) {
+    // Log error
+    console.error("Error deleting watch history:", error);
+
+    // If an error occurs during the deletion process, send a failure response
     failureResponse(res, error);
   }
 };
@@ -96,10 +94,25 @@ function createUpdateHistory(contentId, userId, playedDuration) {
   });
 }
 
+const getWatchHistory = async (req, res) => {
+  try {
+    let userId = req.user.id;
+    let watchHistory = await WatchHistory.find({ userId })
+      .populate("userId", "email role")
+      .populate("contentId", "name genre")
+      .sort({ lastPlayed: -1 });
+
+    successResponse(res, watchHistory);
+  } catch (error) {
+    failureResponse(res, error);
+  }
+};
+
 module.exports = {
   createHistory,
   getWatchHistory,
   updateHistory,
   deleteHistory,
   deleteAllHistory,
+  createUpdateHistory,
 };
